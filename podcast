@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transcript Review — Recommended Removals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0A1F3C;
+    --navy-2:#102B50;
+    --navy-line:#1C3A63;
+    --teal:#15B8C4;
+    --teal-deep:#0E8E99;
+    --ink:#16243A;
+    --slate:#5A6B82;
+    --slate-2:#7E8DA1;
+    --surface:#F4F7FA;
+    --card:#FFFFFF;
+    --line:#E3E9F0;
+    --line-soft:#EEF2F6;
+
+    --cat-human:#0E8E99;
+    --cat-surv:#5B5BD6;
+    --cat-priv:#D6453E;
+    --cat-over:#5A6B82;
+    --cat-cult:#C77512;
+    --cat-market:#0E8C5A;
+
+    --prio-bg:#FFF6E9;
+    --prio-edge:#E8A33D;
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--surface);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    padding:40px 28px;
+  }
+
+  .sheet{
+    max-width:1120px;
+    margin:0 auto;
+    background:var(--card);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 1px 0 rgba(16,43,80,.04),0 24px 60px -28px rgba(10,31,60,.28);
+    border:1px solid var(--line);
+  }
+
+  /* ---------- Header ---------- */
+  .head{
+    background:
+      radial-gradient(120% 140% at 88% -10%, rgba(21,184,196,.20) 0%, rgba(21,184,196,0) 46%),
+      linear-gradient(180deg,var(--navy) 0%, var(--navy-2) 100%);
+    color:#fff;
+    padding:30px 36px 26px;
+    position:relative;
+  }
+  .brandrow{
+    display:flex;align-items:center;gap:11px;
+    margin-bottom:20px;
+  }
+  .logo-mark{
+    width:30px;height:30px;border-radius:8px;
+    background:linear-gradient(135deg,var(--teal) 0%, var(--teal-deep) 100%);
+    display:grid;place-items:center;
+    box-shadow:0 4px 14px -4px rgba(21,184,196,.7);
+  }
+  .logo-mark svg{display:block;}
+  .brand-name{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;font-size:15px;letter-spacing:.02em;
+  }
+  .brand-name span{color:var(--teal);}
+  .brand-tag{
+    margin-left:auto;
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:#8FA6C4;font-weight:600;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--teal);font-weight:600;margin-bottom:10px;
+  }
+  h1{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;font-size:31px;line-height:1.12;
+    margin:0 0 10px;letter-spacing:-.01em;
+  }
+  .subhead{
+    font-size:14px;line-height:1.5;color:#B9C8DC;max-width:760px;margin:0;
+    font-weight:400;
+  }
+
+  .stats{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;
+  }
+  .stat{
+    background:rgba(255,255,255,.06);
+    border:1px solid var(--navy-line);
+    border-radius:11px;
+    padding:11px 16px 10px;
+    min-width:118px;
+  }
+  .stat b{
+    font-family:'Space Grotesk',sans-serif;
+    display:block;font-size:22px;line-height:1;font-weight:700;color:#fff;
+  }
+  .stat b .tk{color:var(--teal);}
+  .stat small{
+    display:block;margin-top:6px;font-size:11px;letter-spacing:.04em;
+    text-transform:uppercase;color:#90A4C2;font-weight:600;
+  }
+
+  /* ---------- Legend ---------- */
+  .legend{
+    display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;
+    padding:15px 36px;
+    background:var(--surface);
+    border-bottom:1px solid var(--line);
+    font-size:12px;color:var(--slate);
+  }
+  .legend .lg-title{
+    font-weight:600;color:var(--ink);font-size:11px;
+    letter-spacing:.1em;text-transform:uppercase;margin-right:2px;
+  }
+  .key{display:inline-flex;align-items:center;gap:7px;font-weight:500;}
+  .dot{width:9px;height:9px;border-radius:50%;flex:none;}
+  .legend .prio-key{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-weight:600;color:var(--ink);}
+  .prio-star{color:var(--prio-edge);font-size:14px;line-height:1;}
+
+  /* ---------- Table ---------- */
+  .tablewrap{padding:6px 18px 10px;}
+  table{width:100%;border-collapse:collapse;}
+  thead th{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--slate-2);font-weight:600;text-align:left;
+    padding:14px 14px 11px;border-bottom:1.5px solid var(--line);
+    white-space:nowrap;
+  }
+  tbody td{
+    padding:14px 14px;vertical-align:top;
+    border-bottom:1px solid var(--line-soft);
+    font-size:13px;line-height:1.46;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr.prio{background:var(--prio-bg);}
+  tbody tr.prio td:first-child{box-shadow:inset 3px 0 0 var(--prio-edge);}
+  tbody tr:hover{background:#F8FBFC;}
+  tbody tr.prio:hover{background:#FFF1DC;}
+
+  .ts{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;font-weight:600;color:var(--navy-2);
+    white-space:nowrap;
+  }
+  .ts .star{color:var(--prio-edge);margin-left:5px;}
+
+  .spk{font-weight:600;color:var(--ink);font-size:12.5px;line-height:1.35;}
+  .spk small{display:block;font-weight:500;color:var(--slate-2);font-size:11px;margin-top:2px;}
+
+  .quote{color:var(--ink);}
+  .quote .frag{color:var(--slate);font-style:italic;}
+  .why{color:var(--slate);font-size:12.5px;}
+
+  .cat{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:11px;font-weight:600;white-space:nowrap;
+    padding:4px 9px;border-radius:999px;
+    border:1px solid var(--line);background:#fff;color:var(--ink);
+  }
+  .col-ts{width:1%;}
+  .col-spk{width:15%;}
+  .col-cat{width:1%;}
+
+  /* ---------- Priority callout ---------- */
+  .priority{
+    padding:26px 36px 34px;
+    background:linear-gradient(180deg,#FFFCF6 0%, #FFFFFF 60%);
+    border-top:1px solid var(--line);
+  }
+  .priority h2{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:15px;font-weight:700;margin:0 0 3px;
+    display:flex;align-items:center;gap:9px;letter-spacing:.01em;
+  }
+  .priority h2 .star{color:var(--prio-edge);}
+  .priority .lead{font-size:12.5px;color:var(--slate);margin:0 0 18px;}
+  .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .pcard{
+    border:1px solid var(--line);border-radius:13px;
+    padding:16px 17px 17px;background:#fff;position:relative;
+    box-shadow:0 10px 24px -20px rgba(10,31,60,.5);
+  }
+  .pcard::before{
+    content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:3px;
+    background:var(--prio-edge);
+  }
+  .pcard .rank{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;
+    color:var(--prio-edge);letter-spacing:.1em;text-transform:uppercase;
+  }
+  .pcard .ptime{
+    font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:14px;
+    color:var(--navy-2);margin:5px 0 9px;
+  }
+  .pcard p{margin:0;font-size:12.5px;line-height:1.5;color:var(--slate);}
+  .pcard p b{color:var(--ink);font-weight:600;}
+
+  /* ---------- Footer ---------- */
+  .foot{
+    padding:16px 36px 20px;border-top:1px solid var(--line);
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    font-size:11.5px;color:var(--slate-2);
+  }
+  .foot .src{font-family:'IBM Plex Mono',monospace;color:var(--slate);}
+  .foot .right{margin-left:auto;font-weight:600;color:var(--teal-deep);letter-spacing:.04em;}
+
+  @media (max-width:780px){
+    body{padding:18px 10px;}
+    .head,.legend,.priority,.foot{padding-left:20px;padding-right:20px;}
+    h1{font-size:24px;}
+    .pgrid{grid-template-columns:1fr;}
+    .col-spk{width:auto;}
+    thead{display:none;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- HEADER -->
+  <header class="head">
+    <div class="brandrow">
+      <span class="logo-mark" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M2 11.5L6 3.2c.4-.8 1.6-.8 2 0l4 8.3" stroke="#06303A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="8" cy="9.7" r="1.5" fill="#06303A"/>
+        </svg>
+      </span>
+      <span class="brand-name">AI&nbsp;<span>Rudder</span></span>
+      <span class="brand-tag">Comms Review</span>
+    </div>
+
+    <div class="eyebrow">Podcast Transcript / Pre-Publish QA</div>
+    <h1>Recommended Removals Before Clipping</h1>
+    <p class="subhead">Lines and segments to cut from public clips and the published edit. Flagged for privacy, surveillance framing, human-replacement messaging, and cultural sensitivity. Priority rows are the highest-exposure cuts to make first.</p>
+
+    <div class="stats">
+      <div class="stat"><b>16</b><small>Segments flagged</small></div>
+      <div class="stat"><b><span class="tk">9</span></b><small>Priority cuts</small></div>
+      <div class="stat"><b>3</b><small>Speakers</small></div>
+      <div class="stat"><b>6</b><small>Risk themes</small></div>
+    </div>
+  </header>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <span class="lg-title">Risk theme</span>
+    <span class="key"><span class="dot" style="background:var(--cat-human)"></span>Human replacement</span>
+    <span class="key"><span class="dot" style="background:var(--cat-surv)"></span>Surveillance</span>
+    <span class="key"><span class="dot" style="background:var(--cat-priv)"></span>Privacy / profiling</span>
+    <span class="key"><span class="dot" style="background:var(--cat-cult)"></span>Cultural sensitivity</span>
+    <span class="key"><span class="dot" style="background:var(--cat-over)"></span>Overgeneralization</span>
+    <span class="key"><span class="dot" style="background:var(--cat-market)"></span>SEA market / labor</span>
+    <span class="prio-key"><span class="prio-star">★</span>Priority removal</span>
+  </div>
+
+  <!-- TABLE -->
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr>
+          <th class="col-ts">Timestamp</th>
+          <th class="col-spk">Speaker</th>
+          <th>Remove this section</th>
+          <th>Why remove</th>
+          <th class="col-cat">Theme</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr class="prio">
+          <td><span class="ts">00:23:52–00:24:26<span class="star">★</span></span></td>
+          <td class="spk">Roshan Gil<small>AI Rudder</small></td>
+          <td class="quote">“We build tools that sort of mimic human conversation as closely as possible…”</td>
+          <td class="why">Can sound like AI Rudder is trying to make bots deceptive or indistinguishable from humans.</td>
+          <td><span class="cat"><span class="dot" style="background:var(--cat-human)"></span>Human</span></td>
+        </tr>
+
+        <tr class="prio">
+          <td><span class="ts">00:24:26–00:24:56<span class="star">★</span></span></td>
+          <td class="spk">Roshan Gil<small>AI Rudder</small></td>
+          <td class="quote">“If there is an agent sitting somewhere speaking to your end customers, we’ll try to build an AI tool to automate that process.”</td>
+          <td class="why">Can be clipped as “AI Rudder replaces human agents.”</td>
+          <td><span class="cat"><span class="dot" style="background:var(--cat-human)"></span>Human</span></td>
+        </tr>
+
+        <tr>
+          <td><span class="ts">00:27:19–00:28:17</span></td>
+          <td class="spk">Roshan Gil<small>AI Rudder</small></td>
+          <td class="quote">Customer profiling before the call: <span class="frag">“build customer profiles based on how they’ve interacted…” / “I know this customer…”</span></td>
+          <td class="why">Privacy-sensitive. Could look like AI Rudder encourages excessive customer tracking.</td>
+          <td><span class="cat"><span class="dot" style="background:var(--cat-priv)"></span>Privacy</span></td>
+        </tr>
+
+        <tr>
+          <td><span class="ts">00:28:44–00:29:11</span></td>
+          <td class="spk">Roshan Gil<small>AI Rudder</small></td>
+          <td class="quote">“AI agent… in a voice that mimics the human conversation…” / <span class="frag">“very human-like sounding bots”</span></td>
+          <td class="why">Reinforces the “AI pretending to be human” concern.</td>
+          <td><span class="cat"><span class="dot" style="background:var(--cat-human)"></span>Human</span></td>
+        </tr>
+
+        <tr>
+          <td><span class="ts">00:30:32–00:30:59</span></td>
+          <td class="spk">Michael Waitze<small>Host</small></td>
+          <td class="quote">“agent listening to what you’re saying…” / <span class="frag">“listening in real time…”</span></td>
+          <td class="why">Sets up a surveillance-style framing.</td>
+          <td><span class="cat"><span class="dot" style="background:var(--cat-surv)"></span>Surveillance</span></td>
+        </tr>
+
+        <tr>
+          <td><span class="ts">00:30:59–00:31:58</span></td>
+          <td class="spk">Roshan Gil<small>AI Rudder</small></td>
+          <td class="quote">“digital twin… an AI system… to be able to listen in on that conversation”</td>
+          <td class="why">Could raise listening / surveillance concerns if clipped without context.</td>
+          <td><span class="cat"><span class="dot" style="background:var(--cat-surv)"></span>Surveillance</span></td>
+        </tr>
+
+        <tr class="prio">
+          <td><span class="ts">00:32:48–00:33:10<span class="star">★</span></span></td>
+          <td class="spk">Michael Waitze<small>Host</small></td>
+          <td class="quote">“earpiece… microphone listening…” / <span class="frag">“knowing like hey this is Michael Waitze…”</span></td>
+          <td class="why">Sounds invasive even though it is hypothetical.</td>
+          <td><span class="cat"><span class="dot" style="background:var(--cat-surv)"></span>Surveillance</span></td>
+        </tr>
+
+        <tr class="prio">
+          <td><span class="ts">00:33:10–00:34:09<span class="star">★</span></span></td>
+          <td class="spk">Roshan Gil<small>AI Rudder</small></td>
+          <td class="quote">Wearables / AR glasses section: <span class="frag">“as soon as I look at you I know exactly…”</span></td>
+          <td class="why">High privacy risk. Could look creepy or invasive on social.</td>
+          <td><span class="cat"><span class="dot" style="background:var(--cat-priv)"></span>Privacy</span></td>
+        </tr>
+
+        <tr class="prio">
+          <td><span class="ts">00:34:09–00:34:39<span class="star">★</span></span></td>
+          <td class="spk">Roshan Gil<small>AI Rudder</small></td>
+          <td class="quote">“Every time you meet someone, you would have a history of your conversations…”</td>
+          <td class="why">Privacy-sensitive and could be taken as endorsing real-world tracking.</td>
+          <td><span class="cat"><span class="dot" style="background:var(--cat-priv)"></span>Privacy</span></td>
+        </tr>
+
+        <tr class="prio">
+          <td><span class="ts">00:34:39–00:35:00<span class="star">★</span></span></td>
+          <td class="spk">Michael Waitze<small>Host</small></td>
+          <td class="quote">Nike / running shoes setup: <span class="frag">“they should have all that data on me…”</span></td>
+          <td class="why">Adds to the customer-tracking concern.</td>
+          <td><span class="cat"><span class="dot" style="background:var(--cat-priv)"></span>Privacy</span></td>
+        </tr>
+
+        <tr class="prio">
+          <td><span class="ts">00:35:00–00:35:51<span class="star">★</span></span></td>
+          <td class="spk">Roshan Gil<small>AI Rudder</small></td>
+          <td class="quote">“people like you, people with similar profiles…”</td>
+          <td class="why">Could trigger concerns around profiling and predictive targeting.</td>
+          <td><span class="cat"><span class="dot" style="background:var(--cat-priv)"></span>Privacy</span></td>
+        </tr>
+
+        <tr>
+          <td><span class="ts">00:37:14–00:37:42</span></td>
+          <td class="spk">Roshan Gil<small>AI Rudder</small></td>
+          <td class="quote">“If it works well for one customer, it will work well for a million customers.”</td>
+          <td class="why">Too broad. Could sound careless about customer nuance, localization, or compliance.</td>
+          <td><span class="cat"><span class="dot" style="background:var(--cat-over)"></span>Overgeneral</span></td>
+        </tr>
+
+        <tr class="prio">
+          <td><span class="ts">00:41:02–00:41:30<span class="star">★</span></span></td>
+          <td class="spk">Roshan Gil<small>AI Rudder</small></td>
+          <td class="quote">“In Southeast Asia where if you speak perfect English nobody understands you…”</td>
+          <td class="why">Highest-risk line. Can sound insulting toward Southeast Asian customers and English speakers.</td>
+          <td><span class="cat"><span class="dot" style="background:var(--cat-cult)"></span>Cultural</span></td>
+        </tr>
+
+        <tr class="prio">
+          <td><span class="ts">00:41:30–00:41:45<span class="star">★</span></span></td>
+          <td class="spk">Roshan Gil<small>AI Rudder</small></td>
+          <td class="quote">“Malaysia… 20 plus dialects of Malay and if you speak one dialect you could be completely clueless…”</td>
+          <td class="why">Less severe, but still phrased in a way that can sound dismissive or culturally insensitive.</td>
+          <td><span class="cat"><span class="dot" style="background:var(--cat-cult)"></span>Cultural</span></td>
+        </tr>
+
+        <tr>
+          <td><span class="ts">01:10:11–01:10:38</span></td>
+          <td class="spk">Tushapan Kasing Kong<small>Amity</small></td>
+          <td class="quote">“Southeast Asia… IT investment and average wage… much much lower…”</td>
+          <td class="why">Not AI Rudder’s section, but risky if promoted broadly in SEA.</td>
+          <td><span class="cat"><span class="dot" style="background:var(--cat-market)"></span>Market</span></td>
+        </tr>
+
+        <tr>
+          <td><span class="ts">01:10:38–01:10:55</span></td>
+          <td class="spk">Waitze + Kasing Kong<small>Host + Amity</small></td>
+          <td class="quote">“Human capital is much lower…” / <span class="frag">“Exactly.”</span></td>
+          <td class="why">Sounds reductive about SEA labor and market value. Remove from public clips.</td>
+          <td><span class="cat"><span class="dot" style="background:var(--cat-market)"></span>Market</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PRIORITY CALLOUT -->
+  <section class="priority">
+    <h2><span class="star">★</span> Most important removals</h2>
+    <p class="lead">Cut these three windows first. They carry the highest reputational exposure if clipped out of context.</p>
+    <div class="pgrid">
+      <div class="pcard">
+        <div class="rank">Priority 01</div>
+        <div class="ptime">00:41:02–00:41:30</div>
+        <p><b>Roshan Gil / AI Rudder.</b> The “perfect English” line. Highest-risk for sounding insulting toward SEA customers.</p>
+      </div>
+      <div class="pcard">
+        <div class="rank">Priority 02</div>
+        <div class="ptime">00:32:48–00:35:51</div>
+        <p><b>Waitze + Gil.</b> The wearables, AR glasses, and profiling stretch. Reads as surveillance and tracking on social.</p>
+      </div>
+      <div class="pcard">
+        <div class="rank">Priority 03</div>
+        <div class="ptime">00:23:52–00:24:56</div>
+        <p><b>Roshan Gil / AI Rudder.</b> “Mimic human conversation” and “automate the agent.” Easy to clip as deceptive or job-replacing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <span class="src">Source: full interview transcript</span>
+    <span>Speakers: Roshan Gil (AI Rudder), Michael Waitze (Host), Tushapan Kasing Kong (Amity)</span>
+    <span class="right">AI RUDDER · COMMS QA</span>
+  </footer>
+
+</div>
+</body>
+</html>
